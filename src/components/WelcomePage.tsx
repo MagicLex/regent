@@ -34,7 +34,7 @@ const WelcomePage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-surface-light">
+    <div className="min-h-screen flex flex-col bg-surface-light">
       <div className="absolute top-4 right-4">
         <LanguageSelector 
           onLanguageChange={handleLanguageChange}
@@ -42,79 +42,74 @@ const WelcomePage = () => {
         />
       </div>
 
-      <div className="card w-full max-w-md text-center p-8 shadow-sm">
-        <div className="flex justify-center items-center mb-4">
-          <img 
-            src="/assets/eu-flag.svg" 
-            alt="EU" 
-            className="h-6 mr-2"
-          />
-          <img 
-            src="/assets/sweden-flag.svg" 
-            alt="Sweden" 
-            className="h-6"
-          />
-        </div>
+      <div className="flex-1 flex items-center justify-center">
+        <div className="card w-full max-w-md p-10 shadow-md bg-white/80 backdrop-blur-sm">
+          <div className="text-center">
+            <div className="text-6xl mb-6">👑</div>
+            <h1 className="text-4xl font-bold mb-3">{t.welcomeTitle}</h1>
+            <p className="text-xl text-primary mb-6">{t.welcomeSubtitle}</p>
+            
+            {showApiKeyInput ? (
+              <div className="mb-8">
+                <p className="mb-4 text-sm text-gray-600">
+                  Connect to your AI model with your API key. Your key never leaves your device, ensuring complete privacy.
+                </p>
+                <input
+                  type="password"
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder="sk-..."
+                  className="input w-full mb-4"
+                />
+              </div>
+            ) : (
+              <div className="mb-8">
+                <p className="text-lg text-gray-700 mb-2">{t.slogan}</p>
+                <p className="text-sm text-gray-500">{t.description}</p>
+              </div>
+            )}
+            
+            <div className="space-y-3">
+              <button 
+                onClick={handleStart}
+                className="btn btn-primary w-full py-3 text-lg"
+                disabled={showApiKeyInput && !apiKey}
+              >
+                {showApiKeyInput ? t.continueButton : t.startButton}
+              </button>
+              
+              <button
+                onClick={() => setShowBankID(true)}
+                className="btn w-full py-3 flex items-center justify-center bg-white text-lg"
+              >
+                {t.loginWithBankID}
+              </button>
+            </div>
+            
+            {showApiKeyInput && (
+              <button 
+                onClick={() => setShowApiKeyInput(false)}
+                className="mt-4 text-sm text-gray-500 hover:underline"
+              >
+                {t.cancelButton}
+              </button>
+            )}
 
-        <div className="text-6xl mb-4">👑</div>
-        <h1 className="text-3xl font-bold mb-2">{t.welcomeTitle}</h1>
-        <p className="text-lg text-primary mb-4">{t.welcomeSubtitle}</p>
-        
-        {showApiKeyInput ? (
-          <div className="mb-6">
-            <p className="mb-4 text-sm text-gray-600">
-              Connect to your AI model with your API key. Your key never leaves your device, ensuring complete privacy.
-            </p>
-            <input
-              type="password"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              placeholder="sk-..."
-              className="input w-full mb-4"
-            />
+            <div className="mt-8">
+              <LanguageSelector onLanguageChange={handleLanguageChange} />
+            </div>
           </div>
-        ) : (
-          <div className="mb-6">
-            <p className="text-gray-600 mb-2">{t.slogan}</p>
-            <p className="text-sm text-gray-500">{t.description}</p>
-          </div>
-        )}
-        
-        <div className="space-y-2">
-          <button 
-            onClick={handleStart}
-            className="btn btn-primary w-full"
-            disabled={showApiKeyInput && !apiKey}
-          >
-            {showApiKeyInput ? t.continueButton : t.startButton}
-          </button>
-          
-          <button
-            onClick={() => setShowBankID(true)}
-            className="btn w-full flex items-center justify-center bg-white"
-          >
-            <img 
-              src="/assets/bankid-logo.svg" 
-              alt="BankID"
-              className="h-4 mr-2"
-            />
-            {t.loginWithBankID}
-          </button>
-        </div>
-        
-        {showApiKeyInput && (
-          <button 
-            onClick={() => setShowApiKeyInput(false)}
-            className="mt-2 text-sm text-gray-500 hover:underline"
-          >
-            {t.cancelButton}
-          </button>
-        )}
-
-        <div className="mt-8">
-          <LanguageSelector onLanguageChange={handleLanguageChange} />
         </div>
       </div>
+
+      <footer className="p-4 border-t border-border text-center text-sm text-gray-500">
+        <div className="flex items-center justify-center mb-2">
+          <span className="text-sm mr-1">🇸🇪</span>
+          <span className="text-sm mr-2">🇪🇺</span>
+          <span>Made with ❤️ in Sweden</span>
+        </div>
+        <p>Sovereign AI for a sovereign Europe</p>
+      </footer>
 
       {showBankID && (
         <BankIDLogin 

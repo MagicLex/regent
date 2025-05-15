@@ -75,16 +75,8 @@ const ChatPage = () => {
             ☰
           </button>
           <div className="flex items-center mr-3">
-            <img 
-              src="/assets/sweden-flag.svg" 
-              alt="Sweden" 
-              className="h-5 mr-2"
-            />
-            <img 
-              src="/assets/eu-flag.svg" 
-              alt="EU" 
-              className="h-5"
-            />
+            <span className="text-sm mr-1">🇸🇪</span>
+            <span className="text-sm">🇪🇺</span>
           </div>
           <span className="text-2xl mr-2">👑</span>
           <h1 className="text-xl font-semibold">Regent</h1>

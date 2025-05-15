@@ -34,11 +34,7 @@ const BankIDLogin = ({ onSuccess, onCancel }: BankIDLoginProps) => {
       <div className="bg-white rounded w-full max-w-md p-6 m-4">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold flex items-center">
-            <img 
-              src="/assets/bankid-logo.svg" 
-              alt="BankID"
-              className="h-6 mr-2"
-            />
+            <span className="text-blue-700 font-bold mr-2">BankID</span>
             {t.loginWithBankID}
           </h2>
           <button 
@@ -50,17 +46,11 @@ const BankIDLogin = ({ onSuccess, onCancel }: BankIDLoginProps) => {
         </div>
 
         <div className="flex items-center justify-center mb-4">
-          <div className="mr-4">
-            <img 
-              src="/assets/eu-flag.svg" 
-              alt="EU" 
-              className="h-10 mb-2"
-            />
-            <img 
-              src="/assets/sweden-flag.svg" 
-              alt="Sweden" 
-              className="h-10"
-            />
+          <div className="mr-4 text-center">
+            <div className="flex items-center mb-2">
+              <span className="text-sm mr-1">🇸🇪</span>
+              <span className="text-sm">🇪🇺</span>
+            </div>
           </div>
           <p className="text-sm text-gray-700">
             {t.loginMessage}
