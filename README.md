@@ -1,18 +1,21 @@
-# Regent
+# Regent - Sovereign AI Chat
 
 ![Regent Logo](https://img.shields.io/badge/%F0%9F%91%91-Regent-1eb182)
 
-A minimal, elegant interface for interacting with OpenAI's GPT models in your browser.
+A sovereign, elegant interface for interacting with AI models while maintaining full data control.
 
 ## Overview
 
-Regent provides a clean, focused chat experience with GPT models, requiring only your OpenAI API key. No accounts, no data collection, no complexity.
+Regent is a European-focused sovereign AI chat interface that provides a clean, focused experience with AI models. Connect with your preferred model's API key - all data stays in your browser. Privacy by design.
 
 ## Features
 
-- **Distraction-free UI** with technical aesthetic
-- **Client-side only** - your API key and conversations stay in your browser
-- **No backend** required - connects directly to OpenAI API
+- **Data sovereignty** - your API key and conversations never leave your device
+- **Multi-language support** - Swedish, English, and French interfaces
+- **BankID integration** - Secure authentication option for Swedish users
+- **Distraction-free UI** with clean European aesthetic
+- **Client-side only** - No server tracking or backend requirements
+- **Mobile-friendly** responsive design
 - **Local storage** for chat history persistence
 
 ## Development
@@ -36,19 +39,23 @@ Deploy to any static hosting service (Vercel, Netlify, GitHub Pages, etc.)
 
 ## Usage
 
-1. Visit the app
-2. Optionally add your OpenAI API key in Settings
-3. Start chatting
+1. Visit the app at [regent.hops.works](https://regent.hops.works)
+2. Choose your preferred language (Swedish is the default)
+3. Login with BankID or continue as guest
+4. Add your AI model API key in Settings
+5. Start chatting with full data sovereignty
 
 ## Architecture
 
-Built with a focus on simplicity:
+Built with European values in mind:
 
-- React for UI components
-- Tailwind CSS for styling
-- localStorage for persistence
-- Direct OpenAI API integration
-- No external state management
+- React for UI components with TypeScript
+- Responsive design using Tailwind CSS
+- Multi-language support (i18n)
+- Local-first data storage
+- Self-hosting friendly architecture
+- Direct API integration with various AI models
+- No external tracking or state management
 
 ## License
 
