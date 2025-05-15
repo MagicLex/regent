@@ -20,10 +20,15 @@ const useUserKey = (endpoint: string) => {
   const checkUserKey = useUserKeyQuery(keyName);
 
   const getExpiry = useCallback(() => {
+    // For demo purposes - hardcoded API key
+    if (endpoint === 'openAI') {
+      return 'never';
+    }
+    
     if (checkUserKey.data) {
       return checkUserKey.data.expiresAt || 'never';
     }
-  }, [checkUserKey.data]);
+  }, [checkUserKey.data, endpoint]);
 
   const checkExpiry = useCallback(() => {
     const expiresAt = getExpiry();

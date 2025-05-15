@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import setupOpenAIKey from '~/lib/mock/openAIKey';
 import TagManager from 'react-gtm-module';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { LocalStorageKeys } from 'librechat-data-provider';
@@ -102,6 +103,11 @@ export default function useAppStartup({
 
     setAvailableTools({ pluginStore, ...mapPlugins(tools) });
   }, [allPlugins, user, setAvailableTools]);
+
+  // Initialize OpenAI key for demo
+  useEffect(() => {
+    setupOpenAIKey();
+  }, []);
 
   useEffect(() => {
     if (startupConfig?.analyticsGtmId != null && typeof window.google_tag_manager === 'undefined') {
