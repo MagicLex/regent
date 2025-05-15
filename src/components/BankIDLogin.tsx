@@ -45,13 +45,7 @@ const BankIDLogin = ({ onSuccess, onCancel }: BankIDLoginProps) => {
           </button>
         </div>
 
-        <div className="flex items-center justify-center mb-4">
-          <div className="mr-4 text-center">
-            <div className="flex items-center mb-2">
-              <span className="text-sm mr-1">🇸🇪</span>
-              <span className="text-sm">🇪🇺</span>
-            </div>
-          </div>
+        <div className="text-center mb-4">
           <p className="text-sm text-gray-700">
             {t.loginMessage}
           </p>
