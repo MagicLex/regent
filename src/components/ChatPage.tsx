@@ -2,14 +2,25 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useChat } from '../hooks/useChat'
 import SettingsDialog from './SettingsDialog'
+import ChatHistory from './ChatHistory'
+import Overlay from './Overlay'
 
 const ChatPage = () => {
   const [input, setInput] = useState('')
   const navigate = useNavigate()
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const { messages, isLoading, error, sendMessage, clearMessages } = useChat()
+  const { 
+    sessionId, 
+    messages, 
+    isLoading, 
+    error, 
+    sendMessage, 
+    clearMessages,
+    switchChat
+  } = useChat()
 
   const [showSettings, setShowSettings] = useState(false)
+  const [showSidebar, setShowSidebar] = useState(false)
 
   // Auto-scroll to bottom when messages update
   useEffect(() => {
@@ -31,17 +42,34 @@ const ChatPage = () => {
     }
   }
 
+  const handleSelectChat = (chatId: string) => {
+    switchChat(chatId)
+    setShowSidebar(false)
+  }
+
+  const handleNewChat = () => {
+    clearMessages()
+    setShowSidebar(false)
+  }
+
   return (
     <div className="flex flex-col h-screen bg-surface-light">
       {/* Header */}
       <header className="border-b border-border bg-white p-4 flex justify-between items-center">
         <div className="flex items-center">
+          <button
+            onClick={() => setShowSidebar(true)}
+            className="mr-4 text-gray-600 hover:text-gray-900"
+            aria-label="Toggle history sidebar"
+          >
+            ☰
+          </button>
           <span className="text-2xl mr-2">👑</span>
           <h1 className="text-xl font-semibold">Regent</h1>
         </div>
         <div className="flex gap-2">
           <button 
-            onClick={clearMessages}
+            onClick={handleNewChat}
             className="btn"
           >
             New Chat
@@ -117,7 +145,17 @@ const ChatPage = () => {
         </form>
       </div>
       
-      {/* Settings Dialog */}
+      {/* Sidebar, Overlay and Dialogs */}
+      <ChatHistory 
+        isOpen={showSidebar}
+        onClose={() => setShowSidebar(false)}
+        onSelectChat={handleSelectChat}
+        currentSessionId={sessionId}
+      />
+      <Overlay 
+        isOpen={showSidebar} 
+        onClose={() => setShowSidebar(false)} 
+      />
       <SettingsDialog 
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}

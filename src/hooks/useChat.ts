@@ -3,21 +3,22 @@ import { ChatMessage, ChatSession, generateId, saveChatSession, getChatSessionBy
 import { sendChatRequest } from '../utils/api'
 
 interface UseChatProps {
-  sessionId?: string
+  initialSessionId?: string
 }
 
-export function useChat({ sessionId = generateId() }: UseChatProps = {}) {
+export function useChat({ initialSessionId }: UseChatProps = {}) {
+  const [sessionId, setSessionId] = useState<string>(initialSessionId || generateId())
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   // Load existing chat if sessionId is provided
   useEffect(() => {
-    if (sessionId) {
-      const existingSession = getChatSessionById(sessionId)
-      if (existingSession) {
-        setMessages(existingSession.messages)
-      }
+    const existingSession = getChatSessionById(sessionId)
+    if (existingSession) {
+      setMessages(existingSession.messages)
+    } else {
+      setMessages([])
     }
   }, [sessionId])
 
@@ -80,14 +81,22 @@ export function useChat({ sessionId = generateId() }: UseChatProps = {}) {
   }, [messages])
 
   const clearMessages = useCallback(() => {
+    const newId = generateId()
+    setSessionId(newId)
     setMessages([])
   }, [])
 
+  const switchChat = useCallback((chatId: string) => {
+    setSessionId(chatId)
+  }, [])
+
   return {
+    sessionId,
     messages,
     isLoading,
     error,
     sendMessage,
-    clearMessages
+    clearMessages,
+    switchChat
   }
 }
