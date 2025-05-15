@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useChat } from '../hooks/useChat'
-import { getApiKey } from '../utils/storage'
+import SettingsDialog from './SettingsDialog'
 
 const ChatPage = () => {
   const [input, setInput] = useState('')
@@ -9,12 +9,7 @@ const ChatPage = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { messages, isLoading, error, sendMessage, clearMessages } = useChat()
 
-  // Check for API key and redirect if missing
-  useEffect(() => {
-    if (!getApiKey()) {
-      navigate('/')
-    }
-  }, [navigate])
+  const [showSettings, setShowSettings] = useState(false)
 
   // Auto-scroll to bottom when messages update
   useEffect(() => {
@@ -52,7 +47,7 @@ const ChatPage = () => {
             New Chat
           </button>
           <button 
-            onClick={() => navigate('/')}
+            onClick={() => setShowSettings(true)}
             className="btn"
           >
             Settings
@@ -121,6 +116,12 @@ const ChatPage = () => {
           </button>
         </form>
       </div>
+      
+      {/* Settings Dialog */}
+      <SettingsDialog 
+        isOpen={showSettings}
+        onClose={() => setShowSettings(false)}
+      />
     </div>
   )
 }

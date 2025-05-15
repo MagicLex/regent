@@ -33,7 +33,7 @@ export const sendChatRequest = async (request: ChatCompletionRequest) => {
   const apiKey = getApiKey()
   
   if (!apiKey) {
-    throw new Error('API key not found. Please add your OpenAI API key in settings.')
+    throw new Error('API key not found. Please add your OpenAI API key in Settings.')
   }
   
   try {

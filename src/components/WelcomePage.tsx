@@ -7,14 +7,12 @@ const WelcomePage = () => {
   const navigate = useNavigate()
 
   const handleStart = () => {
+    // If API key is provided, save it
     if (apiKey) {
       localStorage.setItem('regent_api_key', apiKey)
-      navigate('/chat')
-    } else if (localStorage.getItem('regent_api_key')) {
-      navigate('/chat')
-    } else {
-      setShowApiKeyInput(true)
     }
+    // Always navigate to chat, even without an API key
+    navigate('/chat')
   }
 
   return (
