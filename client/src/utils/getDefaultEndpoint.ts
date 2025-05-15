@@ -55,6 +55,11 @@ const getDefaultEndpoint = ({
   convoSetup,
   endpointsConfig,
 }: TDefaultEndpoint): EModelEndpoint | undefined => {
+  // For demo purposes, always default to openAI if available
+  if (endpointsConfig && endpointsConfig['openAI']) {
+    return 'openAI' as EModelEndpoint;
+  }
+
   return (
     getEndpointFromSetup(convoSetup, endpointsConfig) ||
     getEndpointFromLocalStorage(endpointsConfig) ||
