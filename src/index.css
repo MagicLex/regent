@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom utility classes */
+.btn {
+  @apply px-4 py-2 font-medium border border-border rounded;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-primary/90;
+}
+
+.input {
+  @apply px-3 py-2 border border-border rounded focus:outline-none focus:ring-1 focus:ring-primary;
+}
+
+.card {
+  @apply border border-border rounded bg-white p-4;
+}
+
+.container-sm {
+  @apply max-w-3xl mx-auto px-4;
+}
+
+.chat-bubble {
+  @apply p-3 mb-2 max-w-[85%] border border-border rounded;
+}
+
+.chat-bubble-user {
+  @apply ml-auto bg-primary/10 text-black;
+}
+
+.chat-bubble-ai {
+  @apply bg-surface-light text-black;
+}

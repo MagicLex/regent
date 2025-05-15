@@ -1,51 +1,54 @@
-# Regent Frontend
+# Regent - Simple AI Chat Interface
 
-This is the frontend UI for Regent (regent.hops.works), a sovereign AI project deployed on Hopsworks.
-
-## Overview
-
-Regent provides a clean, user-friendly interface for interacting with various AI models. This repository contains the frontend UI component, based on the LibreChat project, customized for the Regent platform.
+A minimalist chat UI for interacting with OpenAI's API using your own API key.
 
 ## Features
 
-- Polished, ChatGPT-like user experience
-- User-provided API keys (entered directly in the UI)
-- Support for multiple AI models
-- Clean and intuitive interface
+- Clean, simple UI with technical aesthetic
+- Local storage for chat history
+- Uses your own OpenAI API key (stored in your browser only)
+- No backend required - connects directly to OpenAI API
 
-## Deployment Instructions
+## Development
 
-1. Deploy directly from this repository:
-   - Create a new project on [Vercel](https://vercel.com)
-   - Connect to this GitHub repository
-   - Use the following build settings:
-     - Build Command: `cd frontend-only/client && npm install && npm run build`
-     - Output Directory: `frontend-only/client/dist`
-   - Environment Variables:
-     - APP_TITLE: Regent
-     - VITE_APP_TITLE: Regent
-   - Set the domain to: regent.hops.works
-   - Deploy!
+### Setup
 
-## Project Structure
+```bash
+# Install dependencies
+npm install
 
-This repository is set up for direct deployment to Vercel:
+# Start development server
+npm run dev
+```
 
-- `/frontend-only/client` - The frontend React application (Vite)
-- `/frontend-only/packages` - Supporting packages for the frontend
-- `.env` - Environment configuration
-- `vercel.json` - Vercel deployment configuration
-- `package.json` - Project information and scripts
+### Build for Production
 
-## Future Development
+```bash
+# Build for production
+npm run build
 
-In future iterations, the Regent frontend will connect to a custom Hopsworks backend that provides:
-- Authentication and user management
-- Conversation history persistence
-- Custom model integrations
-- Enhanced security and privacy features
+# Preview production build
+npm run preview
+```
 
-## Resources
+## Deployment
 
-- [Hopsworks Platform](https://www.hopsworks.ai/)
-- [LibreChat GitHub Repository](https://github.com/danny-avila/LibreChat) (UI base)
+The project is set up for easy deployment on Vercel:
+
+1. Push to GitHub
+2. Create a new Vercel project linked to your GitHub repository
+3. Deploy
+
+## Usage
+
+1. Open the app and enter your OpenAI API key
+2. Start a new conversation
+3. Your chats are stored locally in your browser
+
+## Technologies
+
+- React
+- Tailwind CSS
+- Vite
+- Axios for API requests
+- React Router
