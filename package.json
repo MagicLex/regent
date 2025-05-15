@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "cd client && npm install && npm run build",
-    "dev": "cd client && npm run dev",
-    "start": "cd client && npm run preview-prod"
+    "build": "cd frontend-only/client && npm install && npm run build",
+    "dev": "cd frontend-only/client && npm run dev",
+    "start": "cd frontend-only/client && npm run preview-prod"
   },
   "engines": {
     "node": ">=18.0.0"

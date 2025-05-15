@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "cd client && npm install && npm run build",
-  "outputDirectory": "client/dist",
+  "buildCommand": "cd frontend-only/client && npm install && npm run build",
+  "outputDirectory": "frontend-only/client/dist",
   "rewrites": [
     {
       "source": "/(.*)",
