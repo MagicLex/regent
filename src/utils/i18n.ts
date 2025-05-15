@@ -8,7 +8,7 @@ export const LANGUAGES = {
 export type LanguageCode = 'en' | 'sv' | 'fr';
 
 // Default language
-export const DEFAULT_LANGUAGE = LANGUAGES.EN;
+export const DEFAULT_LANGUAGE = LANGUAGES.SV;
 
 // Storage key for language preference
 export const LANGUAGE_STORAGE_KEY = 'regent_language';

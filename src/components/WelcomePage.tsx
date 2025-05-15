@@ -5,12 +5,17 @@ import LanguageSelector from './LanguageSelector'
 import { useTranslations, LanguageCode } from '../utils/i18n'
 
 const WelcomePage = () => {
-  const { t, setLanguage } = useTranslations()
+  const { t, setLanguage, currentLanguage } = useTranslations()
   const [apiKey, setApiKey] = useState('')
   const [showApiKeyInput, setShowApiKeyInput] = useState(false)
   const [showBankID, setShowBankID] = useState(false)
   const [uiRefresh, setUiRefresh] = useState(0)
   const navigate = useNavigate()
+  
+  // Ensure language is initialized properly
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage
+  }, [currentLanguage])
 
   // Force UI refresh when language changes
   const handleLanguageChange = (lang: LanguageCode) => {

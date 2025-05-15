@@ -8,7 +8,7 @@ import LanguageSelector from './LanguageSelector'
 import { useTranslations, LanguageCode } from '../utils/i18n'
 
 const ChatPage = () => {
-  const { t, setLanguage } = useTranslations()
+  const { t, setLanguage, currentLanguage } = useTranslations()
   const [input, setInput] = useState('')
   const [uiRefresh, setUiRefresh] = useState(0)
   const navigate = useNavigate()
@@ -22,6 +22,11 @@ const ChatPage = () => {
     clearMessages,
     switchChat
   } = useChat()
+  
+  // Ensure language is properly set
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage
+  }, [currentLanguage])
 
   const [showSettings, setShowSettings] = useState(false)
   const [showSidebar, setShowSidebar] = useState(false)
