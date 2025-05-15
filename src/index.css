@@ -21,7 +21,7 @@ body {
 }
 
 .input {
-  @apply px-3 py-2 border border-border rounded focus:outline-none focus:ring-1 focus:ring-primary;
+  @apply px-4 py-3 border border-border rounded focus:outline-none focus:ring-1 focus:ring-primary shadow-sm;
 }
 
 .card {
@@ -33,13 +33,13 @@ body {
 }
 
 .chat-bubble {
-  @apply p-3 mb-2 max-w-[85%] border border-border rounded;
+  @apply p-4 mb-2 max-w-[85%] border border-border rounded shadow-sm;
 }
 
 .chat-bubble-user {
-  @apply ml-auto bg-primary/10 text-black;
+  @apply ml-auto bg-primary/10 text-black border-primary/20;
 }
 
 .chat-bubble-ai {
-  @apply bg-surface-light text-black;
+  @apply bg-white text-black;
 }

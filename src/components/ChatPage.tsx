@@ -55,11 +55,11 @@ const ChatPage = () => {
   return (
     <div className="flex flex-col h-screen bg-surface-light">
       {/* Header */}
-      <header className="border-b border-border bg-white p-4 flex justify-between items-center">
+      <header className="border-b border-border bg-surface-light p-4 flex justify-between items-center shadow-sm">
         <div className="flex items-center">
           <button
             onClick={() => setShowSidebar(true)}
-            className="mr-4 text-gray-600 hover:text-gray-900"
+            className="mr-4 text-gray-600 hover:text-gray-900 focus:outline-none focus:text-primary"
             aria-label="Toggle history sidebar"
           >
             ☰
@@ -70,13 +70,13 @@ const ChatPage = () => {
         <div className="flex gap-2">
           <button 
             onClick={handleNewChat}
-            className="btn"
+            className="btn bg-white/80 hover:bg-white"
           >
             New Chat
           </button>
           <button 
             onClick={() => setShowSettings(true)}
-            className="btn"
+            className="btn bg-white/80 hover:bg-white"
           >
             Settings
           </button>
@@ -95,7 +95,7 @@ const ChatPage = () => {
             </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-4 max-w-3xl mx-auto">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -122,20 +122,20 @@ const ChatPage = () => {
       </div>
 
       {/* Input area */}
-      <div className="border-t border-border bg-white p-4 container-sm">
-        <form onSubmit={handleSubmit} className="flex items-end gap-2">
+      <div className="border-t border-border py-6 px-4 container-sm bg-surface-light">
+        <form onSubmit={handleSubmit} className="flex items-end gap-2 max-w-3xl mx-auto">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type a message..."
-            className="input flex-1 resize-none h-[60px] max-h-[200px] min-h-[60px]"
+            className="input flex-1 resize-none h-[60px] max-h-[200px] min-h-[60px] bg-white/50 focus:bg-white transition-colors duration-200 w-full"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="btn btn-primary h-[60px] px-6"
+            className="btn btn-primary h-[60px] px-6 shadow-sm flex-shrink-0"
           >
             {isLoading ? (
               <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
