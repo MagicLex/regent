@@ -155,17 +155,22 @@ const AuthContextProvider = ({
   }, []);
 
   useEffect(() => {
+    // For demo purposes - always set as authenticated
+    setIsAuthenticated(true);
+    
     if (userQuery.data) {
       setUser(userQuery.data);
     } else if (userQuery.isError) {
-      doSetError((userQuery.error as Error).message);
-      navigate('/login', { replace: true });
+      // Skip login redirect for demo
+      // doSetError((userQuery.error as Error).message);
+      // navigate('/login', { replace: true });
     }
     if (error != null && error && isAuthenticated) {
       doSetError(undefined);
     }
     if (token == null || !token || !isAuthenticated) {
-      silentRefresh();
+      // Skip silent refresh for demo
+      // silentRefresh();
     }
   }, [
     token,
