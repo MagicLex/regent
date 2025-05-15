@@ -19,12 +19,13 @@ const WelcomePage = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-surface-light">
       <div className="card w-full max-w-md text-center p-8 shadow-sm">
         <div className="text-6xl mb-6">👑</div>
-        <h1 className="text-3xl font-bold mb-6">Regent</h1>
+        <h1 className="text-3xl font-bold mb-2">Regent</h1>
+        <p className="text-lg text-primary mb-4">Sovereign AI Chat</p>
         
         {showApiKeyInput ? (
           <div className="mb-6">
             <p className="mb-4 text-sm text-gray-600">
-              Please enter your OpenAI API key to get started. Your key will be stored locally on your device only.
+              Connect to your AI model with your API key. Your key never leaves your device, ensuring complete privacy.
             </p>
             <input
               type="password"
@@ -35,7 +36,10 @@ const WelcomePage = () => {
             />
           </div>
         ) : (
-          <p className="mb-6 text-gray-600">Your simple AI chat interface</p>
+          <div className="mb-6">
+            <p className="text-gray-600 mb-2">Your data. Your models. Your control.</p>
+            <p className="text-sm text-gray-500">A privacy-focused interface for self-hosted AI models</p>
+          </div>
         )}
         
         <button 

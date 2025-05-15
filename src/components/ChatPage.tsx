@@ -90,7 +90,8 @@ const ChatPage = () => {
             <div className="text-center">
               <div className="text-4xl mb-4">👑</div>
               <h2 className="text-xl font-medium mb-2">Welcome to Regent</h2>
-              <p className="text-gray-600">Start a conversation by typing a message below</p>
+              <p className="text-gray-600">Your sovereign AI chat experience</p>
+              <p className="text-sm text-gray-500 mt-2">Control your data. Own your conversations.</p>
             </div>
           </div>
         ) : (

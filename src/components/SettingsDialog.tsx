@@ -55,7 +55,7 @@ const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
         
         <div className="mb-6">
           <label htmlFor="api-key-input" className="block text-sm font-medium mb-1">
-            OpenAI API Key
+            AI Model API Key
           </label>
           <div className="relative">
             <input
@@ -76,7 +76,10 @@ const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
             </button>
           </div>
           <p className="mt-1 text-xs text-gray-500">
-            Your API key is stored only in your browser's local storage.
+            Your API key is stored only in your browser's local storage and never sent to our servers.
+          </p>
+          <p className="mt-2 text-xs text-gray-500">
+            Connect to your preferred AI model by providing the appropriate API key.
           </p>
         </div>
 
