@@ -4,9 +4,13 @@ import { useChat } from '../hooks/useChat'
 import SettingsDialog from './SettingsDialog'
 import ChatHistory from './ChatHistory'
 import Overlay from './Overlay'
+import LanguageSelector from './LanguageSelector'
+import { useTranslations, LanguageCode } from '../utils/i18n'
 
 const ChatPage = () => {
+  const { t, setLanguage } = useTranslations()
   const [input, setInput] = useState('')
+  const [uiRefresh, setUiRefresh] = useState(0)
   const navigate = useNavigate()
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { 
@@ -21,6 +25,12 @@ const ChatPage = () => {
 
   const [showSettings, setShowSettings] = useState(false)
   const [showSidebar, setShowSidebar] = useState(false)
+
+  // Force UI refresh when language changes
+  const handleLanguageChange = (lang: LanguageCode) => {
+    setLanguage(lang)
+    setUiRefresh(prev => prev + 1)
+  }
 
   // Auto-scroll to bottom when messages update
   useEffect(() => {
@@ -55,7 +65,7 @@ const ChatPage = () => {
   return (
     <div className="flex flex-col h-screen bg-surface-light">
       {/* Header */}
-      <header className="border-b border-border bg-surface-light p-4 flex justify-between items-center shadow-sm">
+      <header className="border-b border-border bg-white p-4 flex justify-between items-center shadow-sm">
         <div className="flex items-center">
           <button
             onClick={() => setShowSidebar(true)}
@@ -64,21 +74,39 @@ const ChatPage = () => {
           >
             ☰
           </button>
+          <div className="flex items-center mr-3">
+            <img 
+              src="/assets/sweden-flag.svg" 
+              alt="Sweden" 
+              className="h-5 mr-2"
+            />
+            <img 
+              src="/assets/eu-flag.svg" 
+              alt="EU" 
+              className="h-5"
+            />
+          </div>
           <span className="text-2xl mr-2">👑</span>
           <h1 className="text-xl font-semibold">Regent</h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          <div className="mr-2">
+            <LanguageSelector 
+              onLanguageChange={handleLanguageChange}
+              minimal={true}
+            />
+          </div>
           <button 
             onClick={handleNewChat}
-            className="btn bg-white/80 hover:bg-white"
+            className="btn bg-surface-light hover:bg-surface-light/80"
           >
-            New Chat
+            {t.newChatButton}
           </button>
           <button 
             onClick={() => setShowSettings(true)}
-            className="btn bg-white/80 hover:bg-white"
+            className="btn bg-surface-light hover:bg-surface-light/80"
           >
-            Settings
+            {t.settingsButton}
           </button>
         </div>
       </header>
@@ -89,9 +117,9 @@ const ChatPage = () => {
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
               <div className="text-4xl mb-4">👑</div>
-              <h2 className="text-xl font-medium mb-2">Welcome to Regent</h2>
-              <p className="text-gray-600">Your sovereign AI chat experience</p>
-              <p className="text-sm text-gray-500 mt-2">Control your data. Own your conversations.</p>
+              <h2 className="text-xl font-medium mb-2">{t.welcomeTitle}</h2>
+              <p className="text-gray-600">{t.welcomeSubtitle}</p>
+              <p className="text-sm text-gray-500 mt-2">{t.emptyStateMessage}</p>
             </div>
           </div>
         ) : (
@@ -108,7 +136,7 @@ const ChatPage = () => {
             ))}
             {isLoading && (
               <div className="chat-bubble chat-bubble-ai animate-pulse">
-                Thinking...
+                {t.thinkingMessage}
               </div>
             )}
             {error && (
@@ -122,28 +150,30 @@ const ChatPage = () => {
       </div>
 
       {/* Input area */}
-      <div className="border-t border-border py-6 px-4 container-sm bg-surface-light">
-        <form onSubmit={handleSubmit} className="flex items-end gap-2 max-w-3xl mx-auto">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type a message..."
-            className="input flex-1 resize-none h-[60px] max-h-[200px] min-h-[60px] bg-white/50 focus:bg-white transition-colors duration-200 w-full"
-            disabled={isLoading}
-          />
-          <button
-            type="submit"
-            disabled={isLoading || !input.trim()}
-            className="btn btn-primary h-[60px] px-6 shadow-sm flex-shrink-0"
-          >
-            {isLoading ? (
-              <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-            ) : (
-              'Send'
-            )}
-          </button>
-        </form>
+      <div className="py-6 px-4 container-sm bg-surface-light">
+        <div className="max-w-3xl mx-auto">
+          <form onSubmit={handleSubmit} className="flex items-end gap-2 w-full">
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={t.messagePlaceholder}
+              className="input flex-1 resize-none h-[60px] max-h-[200px] min-h-[60px] bg-white/50 focus:bg-white transition-colors duration-200 w-full"
+              disabled={isLoading}
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !input.trim()}
+              className="btn btn-primary h-[60px] px-6 shadow-sm flex-shrink-0"
+            >
+              {isLoading ? (
+                <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              ) : (
+                t.sendButton
+              )}
+            </button>
+          </form>
+        </div>
       </div>
       
       {/* Sidebar, Overlay and Dialogs */}

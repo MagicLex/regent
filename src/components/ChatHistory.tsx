@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getChatSessions, deleteChatSession, ChatSession } from '../utils/storage'
+import { useTranslations } from '../utils/i18n'
 
 interface ChatHistoryProps {
   isOpen: boolean
@@ -9,6 +10,7 @@ interface ChatHistoryProps {
 }
 
 const ChatHistory = ({ isOpen, onClose, onSelectChat, currentSessionId }: ChatHistoryProps) => {
+  const { t } = useTranslations()
   const [sessions, setSessions] = useState<ChatSession[]>([])
 
   useEffect(() => {
@@ -29,7 +31,7 @@ const ChatHistory = ({ isOpen, onClose, onSelectChat, currentSessionId }: ChatHi
   return (
     <div className="fixed inset-y-0 left-0 z-40 w-72 bg-white border-r border-border shadow-lg transform transition-transform ease-in-out duration-300">
       <div className="flex items-center justify-between p-4 border-b border-border">
-        <h2 className="text-lg font-semibold">Chat History</h2>
+        <h2 className="text-lg font-semibold">{t.chatHistoryTitle}</h2>
         <button
           onClick={onClose}
           className="text-gray-500 hover:text-gray-700"
@@ -41,7 +43,7 @@ const ChatHistory = ({ isOpen, onClose, onSelectChat, currentSessionId }: ChatHi
       <div className="overflow-y-auto h-[calc(100%-60px)]">
         {sessions.length === 0 ? (
           <div className="p-4 text-center text-gray-500">
-            No chat history yet
+            {t.noChatHistory}
           </div>
         ) : (
           <ul className="divide-y divide-border">
@@ -62,6 +64,7 @@ const ChatHistory = ({ isOpen, onClose, onSelectChat, currentSessionId }: ChatHi
                 <button
                   onClick={(e) => handleDeleteChat(e, session.id)}
                   className="text-gray-400 hover:text-red-500 ml-2"
+                  aria-label="Delete chat"
                 >
                   🗑️
                 </button>

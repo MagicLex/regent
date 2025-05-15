@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getApiKey, saveApiKey } from '../utils/storage'
+import { useTranslations } from '../utils/i18n'
 
 interface SettingsDialogProps {
   isOpen: boolean
@@ -7,6 +8,7 @@ interface SettingsDialogProps {
 }
 
 const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
+  const { t } = useTranslations()
   const [apiKey, setApiKey] = useState('')
   const [showApiKey, setShowApiKey] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -43,7 +45,7 @@ const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
         aria-modal="true"
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 id="settings-title" className="text-xl font-semibold">Settings</h2>
+          <h2 id="settings-title" className="text-xl font-semibold">{t.settingsTitle}</h2>
           <button 
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
@@ -55,7 +57,7 @@ const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
         
         <div className="mb-6">
           <label htmlFor="api-key-input" className="block text-sm font-medium mb-1">
-            AI Model API Key
+            {t.apiKeyLabel}
           </label>
           <div className="relative">
             <input
@@ -63,7 +65,7 @@ const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
               type={showApiKey ? "text" : "password"}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              placeholder="sk-..."
+              placeholder={t.apiKeyPlaceholder}
               className="input w-full pr-10"
             />
             <button
@@ -76,10 +78,10 @@ const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
             </button>
           </div>
           <p className="mt-1 text-xs text-gray-500">
-            Your API key is stored only in your browser's local storage and never sent to our servers.
+            {t.apiKeyStorageInfo}
           </p>
           <p className="mt-2 text-xs text-gray-500">
-            Connect to your preferred AI model by providing the appropriate API key.
+            {t.apiKeyAdditionalInfo}
           </p>
         </div>
 
@@ -95,14 +97,14 @@ const SettingsDialog = ({ isOpen, onClose }: SettingsDialogProps) => {
             className="btn"
             disabled={!!saveMessage}
           >
-            Cancel
+            {t.cancelButton}
           </button>
           <button 
             onClick={handleSave}
             className="btn btn-primary"
             disabled={!!saveMessage}
           >
-            Save
+            {t.saveButton}
           </button>
         </div>
       </div>
