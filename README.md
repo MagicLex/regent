@@ -1,17 +1,21 @@
-# Regent - Simple AI Chat Interface
+# Regent
 
-A minimalist chat UI for interacting with OpenAI's API using your own API key.
+![Regent Logo](https://img.shields.io/badge/%F0%9F%91%91-Regent-1eb182)
+
+A minimal, elegant interface for interacting with OpenAI's GPT models in your browser.
+
+## Overview
+
+Regent provides a clean, focused chat experience with GPT models, requiring only your OpenAI API key. No accounts, no data collection, no complexity.
 
 ## Features
 
-- Clean, simple UI with technical aesthetic
-- Local storage for chat history
-- Uses your own OpenAI API key (stored in your browser only)
-- No backend required - connects directly to OpenAI API
+- **Distraction-free UI** with technical aesthetic
+- **Client-side only** - your API key and conversations stay in your browser
+- **No backend** required - connects directly to OpenAI API
+- **Local storage** for chat history persistence
 
 ## Development
-
-### Setup
 
 ```bash
 # Install dependencies
@@ -19,36 +23,33 @@ npm install
 
 # Start development server
 npm run dev
-```
 
-### Build for Production
-
-```bash
 # Build for production
 npm run build
-
-# Preview production build
-npm run preview
 ```
 
 ## Deployment
 
-The project is set up for easy deployment on Vercel:
+Deploy to any static hosting service (Vercel, Netlify, GitHub Pages, etc.)
 
-1. Push to GitHub
-2. Create a new Vercel project linked to your GitHub repository
-3. Deploy
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMagicLex%2Fregent)
 
 ## Usage
 
-1. Open the app and enter your OpenAI API key
-2. Start a new conversation
-3. Your chats are stored locally in your browser
+1. Visit the app
+2. Optionally add your OpenAI API key in Settings
+3. Start chatting
 
-## Technologies
+## Architecture
 
-- React
-- Tailwind CSS
-- Vite
-- Axios for API requests
-- React Router
+Built with a focus on simplicity:
+
+- React for UI components
+- Tailwind CSS for styling
+- localStorage for persistence
+- Direct OpenAI API integration
+- No external state management
+
+## License
+
+MIT
