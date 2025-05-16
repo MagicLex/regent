@@ -6,6 +6,7 @@ import ChatHistory from './ChatHistory'
 import Overlay from './Overlay'
 import LanguageSelector from './LanguageSelector'
 import { useTranslations, LanguageCode } from '../utils/i18n'
+import { getCurrentBankIDUser, logoutBankID } from '../utils/api'
 
 const ChatPage = () => {
   const { t, setLanguage, currentLanguage } = useTranslations()
@@ -47,6 +48,7 @@ const ChatPage = () => {
 
   const [showSettings, setShowSettings] = useState(false)
   const [showSidebar, setShowSidebar] = useState(false)
+  const [bankIDUser, setBankIDUser] = useState(getCurrentBankIDUser())
 
   // Force UI refresh when language changes
   const handleLanguageChange = (lang: LanguageCode) => {
@@ -83,6 +85,12 @@ const ChatPage = () => {
     clearMessages()
     setShowSidebar(false)
   }
+  
+  const handleLogout = () => {
+    logoutBankID()
+    setBankIDUser(null)
+    navigate('/')
+  }
 
   return (
     <div className="flex flex-col h-screen bg-surface-light">
@@ -100,6 +108,19 @@ const ChatPage = () => {
           <h1 className="text-xl font-semibold hidden sm:inline">Regent</h1>
         </div>
         <div className="flex items-center gap-1 md:gap-2">
+          {bankIDUser && (
+            <div className="flex items-center mr-2 text-sm">
+              <span className="hidden md:inline mr-1 text-gray-600">Logged in as:</span>
+              <span className="font-medium text-primary">{bankIDUser.givenName}</span>
+              <button 
+                onClick={handleLogout}
+                className="ml-2 text-sm text-gray-500 hover:text-red-600 underline"
+                title="Log out"
+              >
+                {isMobile ? '🚪' : 'Log out'}
+              </button>
+            </div>
+          )}
           <div className="mr-1 md:mr-2">
             <LanguageSelector 
               onLanguageChange={handleLanguageChange}

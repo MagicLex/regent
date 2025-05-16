@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import BankIDLogin from './BankIDLogin'
 import LanguageSelector from './LanguageSelector'
 import { useTranslations, LanguageCode } from '../utils/i18n'
+import { isBankIDLoggedIn } from '../utils/api'
 
 const WelcomePage = () => {
   const { t, setLanguage, currentLanguage } = useTranslations()
@@ -16,6 +17,14 @@ const WelcomePage = () => {
   useEffect(() => {
     document.documentElement.lang = currentLanguage
   }, [currentLanguage])
+  
+  // Check if user is already logged in with BankID
+  useEffect(() => {
+    if (isBankIDLoggedIn()) {
+      // Automatically navigate to chat if already logged in
+      navigate('/chat')
+    }
+  }, [])
 
   // Force UI refresh when language changes
   const handleLanguageChange = (lang: LanguageCode) => {

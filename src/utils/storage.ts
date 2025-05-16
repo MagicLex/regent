@@ -2,7 +2,8 @@
 export const STORAGE_KEYS = {
   API_KEY: 'regent_api_key',
   CHAT_HISTORY: 'regent_chat_history',
-  SETTINGS: 'regent_settings'
+  SETTINGS: 'regent_settings',
+  BANKID_USER: 'regent_bankid_user'
 }
 
 // Chat message type
@@ -68,4 +69,28 @@ export const saveApiKey = (apiKey: string): void => {
 // Generate a unique ID (simple implementation for demo)
 export const generateId = (): string => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2, 5)
+}
+
+// BankID user type
+export interface BankIDUser {
+  personalNumber: string
+  name: string
+  givenName: string
+  surname: string
+}
+
+// Get BankID user
+export const getBankIDUser = (): BankIDUser | null => {
+  const userData = localStorage.getItem(STORAGE_KEYS.BANKID_USER)
+  return userData ? JSON.parse(userData) : null
+}
+
+// Save BankID user
+export const saveBankIDUser = (user: BankIDUser): void => {
+  localStorage.setItem(STORAGE_KEYS.BANKID_USER, JSON.stringify(user))
+}
+
+// Remove BankID user (logout)
+export const removeBankIDUser = (): void => {
+  localStorage.removeItem(STORAGE_KEYS.BANKID_USER)
 }
